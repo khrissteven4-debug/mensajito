@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Para ti ❤️</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div id="chocolates"></div>
+  <div class="container">
+
+    <!-- Pantalla 1: datos -->
+    <div class="screen active" id="screen1">
+      <h2>Antes de empezar...</h2>
+      <label>Nombre: <input type="text" id="nombre" placeholder=""></label><br><br>
+      <label>Edad: <input type="number" id="edad" placeholder=""></label><br><br>
+      <label>Estado :
+        <select id="estado">
+          <option value="conociendo">Conociendo a alguien</option>
+          <option value="proceso">En proceso</option>
+        </select>
+      </label><br><br>
+      <button onclick="startStory()">Continuar</button>
+    </div>
+
+    <!-- Pantalla 1.5: Hola periquita -->
+    <div class="screen" id="screenHola">
+      <div class="hola-box">
+        <h2>hola periquita</h2>
+        <img src="imag/primeraparte.png" alt="Imagen primeraparte" width="200">
+        <br>
+        <button onclick="nextScreen('screen2')">Holaaaaa</button>
+      </div>
+    </div>
+
+    <!-- Pantalla 2 -->
+    <div class="screen" id="screen2">
+      <p>Sé que por mi culpa la has pasado mal, y en serio me siento mal por eso.  
+      Sé que ya te lo he dicho, pero de verdad me siento mal cuando es por mi culpa… pero…</p>
+      <h3>¿Quieres quedarte con la duda?</h3>
+      <button onclick="nextScreen('noAdvertencia')">Sí</button> <!-- Sí → error/loop -->
+      <button onclick="nextScreen('siAdvertencia')">No</button> <!-- No → advertencia -->
+    </div>
+
+    <!-- Pantalla 3: Advertencia -->
+    <div class="screen" id="siAdvertencia">
+      <p>⚠️ Advertencia antes de leer lo siguiente:</p>
+      <p>Sé que no llevamos mucho tiempo conociéndonos pero me gusta estar contigo y me gustaria conocer más de ti.</p>
+      <h3>Ahora escoge:</h3>
+      <button onclick="nextScreen('quieroSeguir')">Quiero seguir leyendo</button>
+      <button onclick="nextScreen('noQuiero')">No quiero</button>
+    </div>
+
+    <!-- Pantalla 4: Quiero seguir -->
+    <div class="screen" id="quieroSeguir">
+      <p>¿Segura que quieres ver lo que sigue? Me dio algo de vergüenza escribirlo… pero no me molesta si es para ti.</p>
+      <button onclick="nextScreen('antes')">Sí quiero seguir</button>
+      <button onclick="nextScreen('noQuiero')">No quiero seguir :(</button>
+    </div>
+
+        <div class="screen" id="antes">
+      <p>Perdón si sueno un poco romántico, jajaja… creo que la noche ya me está afectando.</p>
+      <button onclick="nextScreen('confesion')">Sí quiero seguir</button>
+      <button onclick="nextScreen('noQuiero')">No quiero seguir :(</button>
+    </div>
+
+    <!-- Pantalla 5: Confesión -->
+    <div class="screen" id="confesion">
+      <p>Pero eres la primera chica de la que me estoy enamorando, y la verdad es que soy nuevo en esto.  
+      No siempre sé cómo actuar, y quizás por eso no soy tan atrevido contigo.  
+      Me da miedo que te molestes y que lo que estamos construyendo se termine…  
+      porque si te soy sincero me está gustando mucho lo que tenemos.  
+      No quiero que mi primer amor se pierda por culpa de mis acciones o por mis palabras.</p>
+      <h3>¿Quieres seguir leyendo?</h3>
+      <button onclick="nextScreen('seguroSeguir')">Quiero</button>
+      <button onclick="nextScreen('noQuiero')">No quiero</button>
+    </div>
+
+    <!-- Pantalla 6: Confirmación -->
+    <div class="screen" id="seguroSeguir">
+      <img src="imag/segunda.png" alt="Imagen primeraparte" width="150">
+      <p>¿Segura? Lo que voy a decir puede sonar un poco acosador, pero es lo que realmente pienso de ti… y me gusta, incluso con el poco tiempo que llevamos conociéndonos..</p>
+      <button onclick="nextScreen('halagos')">Sí</button>
+      <button onclick="nextScreen('errorNo')">No</button>
+    </div>
+
+    <!-- Pantalla 7: Halagos -->
+    <div class="screen" id="halagos">
+      <p>La verdad me gusta estar contigo, me gusta ver esos ojos hermosos,  
+      esos color café, café que quita el sueño, café que produce desvelos.  
+      Me gusta escucharte porque me gusta verte hablar de lo que te gusta,  
+      aunque sea de chocolate jajaja o de cualquier otro tema.  
+      Mientras seas tú, puedo escucharte por horas o días.  
+      Hay muchas cosas que me gustan y me faltan por conocer de ti,  
+      y espero poder seguir conociéndote más y más, claro si tú estás de acuerdo con eso. ❤️</p>
+      <button onclick="nextScreen('perdonFinal')">Sí</button>
+      <button onclick="nextScreen('seguraNo')">No, gracias</button>
+    </div>
+
+<!-- Pantalla 8: Perdón final -->
+<div class="screen" id="perdonFinal">
+  <h2>La quiero y perdón por lo que le he hecho pasar ❤️</h2>
+  <p>¿Quieres borrar este sitio web?</p>
+  <button onclick="borrarSitio()">Sí</button>
+  <button onclick="mostrarCorazones()">No</button>
+</div>
+
+<!-- Contenedor para el efecto de corazones -->
+<div id="corazonEffect" class="hidden">
+  <h1 id="mensajeCorazon">💖 la quiero más que ayer, pero menos que mañana 💖</h1>
+</div>
+
+    <!-- Pantallas de error/loop con retorno -->
+    <div class="screen" id="noAdvertencia">
+    <img src="imag/tercero.png" alt="Imagen primeraparte" width="150">
+      <p>Naah, lo más seguro es que te equivocaste. Está bien, todos cometemos errores 😅</p>
+      <button onclick="volverAnterior()">Me equivoqué</button> <!-- regresa a pantalla2 o la anterior -->
+    </div>
+
+    <div class="screen" id="noQuiero">
+      <p>Esta vez no voy a aceptar un “no” como respuesta😅</p>
+      <button onclick="volverAnterior()">Volver</button> <!-- regresa a pantalla anterior -->
+    </div>
+
+    <div class="screen" id="errorNo">
+      <p>No me equivoqué… ¿segura?</p>
+      <button onclick="volverAnterior()">Me equivoqué</button>
+      <button onclick="nextScreen('errorNo')">No, no me equivoqué</button>
+    </div>
+
+    <div class="screen" id="seguraNo">
+      <img src="prueba.png" alt="Imagen primeraparte" width="50">
+      <p>¿Segura?</p>
+      <button onclick="volverAnterior()">Me equivoqué de botón</button>
+      <button onclick="nextScreen('seguraNo')">Estoy segura :(</button>
+    </div>
+
+  </div>
+</body>
+</html>
